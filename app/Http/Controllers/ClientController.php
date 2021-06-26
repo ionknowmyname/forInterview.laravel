@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use DB;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
     //
     function submitData(Request $req){
         //return $req->input();
+
+        // dd($req->file('filename'));
+
         $client = new Client;
 
         $client->firstname=$req->firstname;
@@ -23,7 +29,9 @@ class ClientController extends Controller
         // $client->filename = request()->file('filename')->store('public/images');  
         
         $client->save();
-        return redirect('/newclient');
+        Mail::to($client->email)->send(new WelcomeMail());  // $client->firstname
+
+        return redirect('/allclient');
 
     }
 
@@ -36,8 +44,31 @@ class ClientController extends Controller
         return view('listclient', ['clients' => $clients]);
     }
 
-    function getsingleclient(Client $id)
+    function getsingleclient($id) // Client  Request $req, $id
     {
-        return view('singleclient', ['client' => $id]);
+        //$client = Client::find($id);
+        $client = DB::Table('clients')->where('id', $id)->first();
+        //var_dump($client);
+        return view('singleclient', ['client' => $client]);
+        // view('singleclient', ['client' => $id]);
     }
+
+
 }
+
+
+
+// {{ asset('storage/app/{{$client->filename')}}  }}
+
+//    <!-- <h3 class="card-title">{{ $client->firstname }}</h3> -->
+
+
+
+
+/* use Illuminate\Support\Facades\Storage;
+
+$url = Storage::url('file.jpg');
+$url2 = Storage::url($client->filename)
+<!-- $url3 =  -->
+
+*/

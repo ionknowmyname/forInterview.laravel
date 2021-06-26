@@ -18,7 +18,7 @@ Route::get('/', function () {
 }); 
 
 Route::get('/newclient', [ClientController::class, 'getForm']);
-Route::get('/allclient/{$id}', [ClientController::class, 'getsingleclient']);   // single client
+Route::get('/oneclient/{id}', [ClientController::class, 'getsingleclient']);   // single client
 Route::get('/allclient', [ClientController::class, 'getclientlist']); // all clients
 
 Route::post("/newclient", [ClientController::class, 'submitData']);
