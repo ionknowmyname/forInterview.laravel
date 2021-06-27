@@ -26,13 +26,13 @@ class ClientController extends Controller
         $client->DOB=$req->DOB;
         $client->casedetails=$req->casedetails;
         $client->filename = $req->file('filename')->store('public/images');
-        // $client->filename = request()->file('filename')->store('public/images');  
+        // $client->filename = req()->file('filename')->store('public/images');  
         
         $client->save();
         Mail::to($client->email)->send(new WelcomeMail());  // $client->firstname
 
         return redirect('/allclient');
-
+        //////////////////////////////////////////////     
     }
 
     function getForm() {
@@ -49,8 +49,8 @@ class ClientController extends Controller
         //$client = Client::find($id);
         $client = DB::Table('clients')->where('id', $id)->first();
         //var_dump($client);
+       
         return view('singleclient', ['client' => $client]);
-        // view('singleclient', ['client' => $id]);
     }
 
 
@@ -59,6 +59,7 @@ class ClientController extends Controller
 
 
 // {{ asset('storage/app/{{$client->filename')}}  }}
+// /storage/app/{{$client->filename}}
 
 //    <!-- <h3 class="card-title">{{ $client->firstname }}</h3> -->
 

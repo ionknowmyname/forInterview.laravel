@@ -4,7 +4,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <div class="card" style="width: 270px;margin: 5px">
-        <img class="card-img-top" src="/storage/app/{{$client->filename}}" alt="Card image cap">
+        <img class="card-img-top" src="{{asset('storage/app/'.$client->filename)}}" alt="Card image cap"/>
         <div class="card-block">
             
             ID: <h4>{{$client->id}}</h4>

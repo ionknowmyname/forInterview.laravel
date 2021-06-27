@@ -18,6 +18,7 @@ Route::get('/', function () {
 }); 
 
 Route::get('/newclient', [ClientController::class, 'getForm']);
+//Route::get('newclient', 'ClientController@getForm');
 Route::get('/oneclient/{id}', [ClientController::class, 'getsingleclient']);   // single client
 Route::get('/allclient', [ClientController::class, 'getclientlist']); // all clients
 
